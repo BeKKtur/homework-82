@@ -1,3 +1,5 @@
+import {Model} from "mongoose";
+
 export interface Artists {
     name: string;
     photo?: string;
@@ -16,3 +18,27 @@ export interface Track {
     album: string;
     duration: string;
 }
+
+export interface User {
+    username: string;
+    password: string;
+    token: string;
+}
+
+export interface TrackHistory {
+    user: string;
+    track: string;
+    datetime: string;
+}
+
+interface UserMethods {
+    checkPassword(password: string): Promise<boolean>;
+    generateToken(): void;
+}
+
+interface TrackMethods {
+    dateTime(): void;
+}
+
+export type UserModel = Model<User, {}, UserMethods>
+export type TrackModel = Model<TrackHistory, {}, TrackMethods>
